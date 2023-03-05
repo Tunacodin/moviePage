@@ -29,7 +29,7 @@ function addFilm(e) { //e-->event -- submit edildiğinde çalışacak fonksiyon
 
     if (title === "" || director === "" || url === "") { //eğer title, director veya url boşsa
         //hata
-        alert("Tüm alanları doldurunuz"); //alert ile hata mesajı veriyoruz
+    
         ui.displayMessages("Tüm alanları doldurunuz..", "danger"); //ui.js de displayMessages fonksiyonu var
     }
 

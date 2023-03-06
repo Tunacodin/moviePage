@@ -45,3 +45,31 @@ UI.prototype.displayMessages = function (message, type) { //message-->alert mesa
     }, 1000);
 }
 
+
+UI.prototype.loadAllFilms = function (films) { //films-->storage'dan gelen filmler 
+    const filmList = document.getElementById("films"); //films id'li tabloyu seçtik
+    films.forEach(function (film) { //films dizisindeki her bir film için
+        filmList.innerHTML += `
+         <tr>
+                                            <td><img src="${film.url}" class="img-fluid img-thumbnail"></td>
+                                            <td>${film.title}</td>
+                                            <td>${film.director}</td>
+                                            <td><a href="#" id = "delete-film" class = "btn btn-danger">Filmi Sil</a></td>
+                                          </tr>`; //films id'li tabloya yeni bir satır ekledik
+
+    });
+}
+
+UI.prototype.deleteFilmFromUI = function (element) { 
+    element.parentElement.parentElement.remove(); //element-->silme butonu, parentElement-->a, parentElement-->tr
+    
+}
+
+UI.prototype.clearAllFilmsFromUI = function (element) {
+    const filmList = document.getElementById("films"); //films id'li tabloyu seçtik
+    // filmList.innerHTML = ""; //filmList'in içini boşaltma
+    while (filmList.firstElementChild !== null) { //filmList'in ilk çocuğu boş değilse
+        filmList.firstElementChild.remove(); //filmList'in ilk çocuğunu sil
+    }
+
+}

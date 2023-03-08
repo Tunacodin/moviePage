@@ -12,10 +12,6 @@ const cardBody = document.querySelectorAll(".card-body")[1];
 //clear-films id'li butonu seçtik
 const clear = document.getElementById("clear-films"); 
 
-//UI nesnesini başlatıyoruz
-const ui = new UI(); //UI nesnesi oluşturduk
-
-const storage = new Storage(); //Storage nesnesi oluşturduk
 
 //Tüm eventleri yükleme
 
@@ -27,8 +23,8 @@ function eventListeners() { //eventListeners fonksiyonu oluşturduk
     clear.addEventListener("click",clearAllFilms); //clear-films id'li butona tıklandığında clearAllFilms fonksiyonunu çalıştır
     document.addEventListener("DOMContentLoaded", function () { //sayfa yüklendiğinde
         
-        let films = storage.getFilmsFromStorage(); //storage'dan filmleri alıyoruz
-        ui.loadAllFilms(films); //ui.js de loadAllFilms fonksiyonu var
+        let films = Storage.getFilmsFromStorage(); //storage'dan filmleri alıyoruz
+        UI.loadAllFilms(films); //ui.js de loadAllFilms fonksiyonu var
     });
 
          //cardBody2 deki delete-film id'li butona tıklandığında deleteFilm fonksiyonunu çalıştır
@@ -47,14 +43,14 @@ function eventListeners() { //eventListeners fonksiyonu oluşturduk
         if (title === "" || director === "" || url === "") { //eğer title, director veya url boşsa
             //hata
     
-            ui.displayMessages("Tüm alanları doldurunuz..", "danger"); //ui.js de displayMessages fonksiyonu var
+            UI.displayMessages("Tüm alanları doldurunuz..", "danger"); //ui.js de displayMessages fonksiyonu var
         }
 
         else { //eğer title, director veya url boş değilse
             const newFilm = new Film(title, director, url) //Film nesnesi oluşturduk -- film.js de Film fonksiyonu var
-            storage.addFilmToStorage(newFilm); //Film nesnesini storage'ya ekleme -- storage.js de addFilmToStorage fonksiyonu var    
-            ui.addFilmToUI(newFilm); //Film nesnesini UI'ya ekleme -- ui.js de addFilmToUI fonksiyonu var
-            ui.displayMessages("Film başarıyla eklendi..", "success"); //ui.js de displayMessages fonksiyonu var
+            Storage.addFilmToStoitrage(newFilm); //Film nesnesini storage'ya ekleme -- storage.js de addFilmToStorage fonksiyonu var    
+            UI.addFilmToUI(newFilm); //Film nesnesini UI'ya ekleme -- ui.js de addFilmToUI fonksiyonu var
+            UI.displayMessages("Film başarıyla eklendi..", "success"); //ui.js de displayMessages fonksiyonu var
        
         }
 
@@ -67,12 +63,12 @@ function eventListeners() { //eventListeners fonksiyonu oluşturduk
 function deleteFilm(e) {
     if (e.target.id === "delete-film") { //e-->event -- target-->tıklanan eleman -- id-->tıklanan elemanın id'si
         if (confirm("Emin misiniz?")) {
-            ui.deleteFilmFromUI(e.target); //ui.js de deleteFilmFromUI fonksiyonu var
-            storage.deleteFilmFromStorage(e.target.parentElement.previousElementSibling.previousElementSibling.textContent); //storage.js de deleteFilmFromStorage fonksiyonu var
-            ui.displayMessages("Silme işlemi başarılı..", "success"); //ui.js de displayMessages fonksiyonu var
+            UI.deleteFilmFromUI(e.target); //ui.js de deleteFilmFromUI fonksiyonu var
+            Storage.deleteFilmFromStorage(e.target.parentElement.previousElementSibling.previousElementSibling.textContent); //storage.js de deleteFilmFromStorage fonksiyonu var
+            UI.displayMessages("Silme işlemi başarılı..", "success"); //ui.js de displayMessages fonksiyonu var
         }
         else {
-            ui.displayMessages("Silme işlemi başarısız..", "danger"); //ui.js de displayMessages fonksiyonu var
+            UI.displayMessages("Silme işlemi başarısız..", "danger"); //ui.js de displayMessages fonksiyonu var
         }
      }
         
@@ -81,8 +77,10 @@ function deleteFilm(e) {
 
                             
 function clearAllFilms(e) { 
+    
     if (confirm("Emin misiniz?")) { //eğer evet'e basarsa
-        ui.clearAllFilmsFromUI(); //ui.js de clearAllFilmsFromUI fonksiyonu var
-        storage.clearAllFilmsFromStorage(); //storage.js de clearAllFilmsFromStorage fonksiyonu var
+        UI.clearAllFilmsFromUI(); //ui.js de clearAllFilmsFromUI fonksiyonu var
+        Storage.clearAllFilmsFromStorage(); //storage.js de clearAllFilmsFromStorage fonksiyonu var
+        UI.displayMessage("Tüm Filmler Silindi", "success"); //ui.js de displayMessage fonksiyonu var
     }
 }

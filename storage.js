@@ -1,15 +1,11 @@
 
-function Storage() {
-
-}
-
-Storage.prototype.addFilmToStorage = function(newFilm) {
+class Storage { //storage adında bir class oluşturduk
+    static addFilmToStorage (newFilm) {
     let films = this.getFilmsFromStorage(); //films adında bir değişken oluşturduk
     films.push(newFilm); //films adlı değişkene newFilm adlı değişkeni push ile ekledik
     localStorage.setItem("films", JSON.stringify(films)); //films adlı değişkeni JSON.stringify ile stringe çevirdik
 }
-
-Storage.prototype.getFilmsFromStorage = function () {
+ static getFilmsFromStorage = function () {
     let films; //films adında bir değişken oluşturduk
     if (localStorage.getItem("films") === null) { //eğer localStorage'da "films" adında bir şey yoksa
         films = []; //films adlı değişkeni boş bir diziye eşitledik
@@ -22,7 +18,7 @@ Storage.prototype.getFilmsFromStorage = function () {
     return films; //films adlı değişkeni döndürdük
 }
 
-Storage.prototype.deleteFilmFromStorage = function (filmTitle) {
+     static deleteFilmFromStorage (filmTitle) {
     let films = this.getFilmsFromStorage(); //films adında bir değişken oluşturduk
 
     films.forEach(function (film, index) { //films dizisindeki her bir filmi dolaş
@@ -34,6 +30,9 @@ Storage.prototype.deleteFilmFromStorage = function (filmTitle) {
     localStorage.setItem("films", JSON.stringify(films)); //films dizisini localStorage'a ekle
 }
 
-Storage.prototype.clearAllFilmsFromStorage = function () {
+static clearAllFilmsFromStorage() {
     localStorage.removeItem("films"); //localStorage'daki "films" adlı şeyi sil
 }
+
+}
+

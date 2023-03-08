@@ -1,8 +1,6 @@
-function UI (){
+class UI {
 
-}
-
-UI.prototype.addFilmToUI = function (newFilm) {
+static addFilmToUI (newFilm) {
                     
     const filmList = document.querySelector("#films"); //films id'li tabloyu seçtik 
     filmList.innerHTML += `
@@ -18,7 +16,7 @@ UI.prototype.addFilmToUI = function (newFilm) {
 }
 
 // çalıştırmak için project.js deki eventListeners fonksiyonunun içine ui.clearInputs(a,b,c) eklemek gerekiyor
-UI.prototype.clearInputs = function(titleElement, directorElement, urlElement){
+static clearInputs(titleElement, directorElement, urlElement){
     titleElement.value = "";
     directorElement.value = "";
     urlElement.value = "";
@@ -26,13 +24,13 @@ UI.prototype.clearInputs = function(titleElement, directorElement, urlElement){
 
 // çalıştırmak için project.js deki eventListeners fonksiyonunun içine ui.displayMessages("Tüm alanları doldurunuz..", "danger"); eklemek gerekiyor
 // displayMessages fonksiyonu ile alert mesajı veriyoruz
-UI.prototype.displayMessages = function (message, type) { //message-->alert mesajı, type-->alert tipi
+static displayMessages(message, type) { //message-->alert mesajı, type-->alert tipi
     //card-body class'ına sahip 1. elemanı seçtik
     const cardBody = document.querySelectorAll(".card-body")[0];
     //Alert divini oluşturma
     const div = document.createElement("div");
     //div class'ını oluşturma
-    div.className = `alert alert-${type}`;
+    div.className = `alert alert-${type}`; //alert-danger, alert-success-- bootstrap'ta alert mesajlarının tipi
     //div'in içine mesajı yazdırma
     div.textContent = message;
     //cardBody'nin ilk çocuğu olarak div'i ekleme
@@ -46,7 +44,7 @@ UI.prototype.displayMessages = function (message, type) { //message-->alert mesa
 }
 
 
-UI.prototype.loadAllFilms = function (films) { //films-->storage'dan gelen filmler 
+static loadAllFilms(films) { //films-->storage'dan gelen filmler 
     const filmList = document.getElementById("films"); //films id'li tabloyu seçtik
     films.forEach(function (film) { //films dizisindeki her bir film için
         filmList.innerHTML += `
@@ -60,12 +58,12 @@ UI.prototype.loadAllFilms = function (films) { //films-->storage'dan gelen filml
     });
 }
 
-UI.prototype.deleteFilmFromUI = function (element) { 
+static deleteFilmFromUI (element) { 
     element.parentElement.parentElement.remove(); //element-->silme butonu, parentElement-->a, parentElement-->tr
     
 }
 
-UI.prototype.clearAllFilmsFromUI = function (element) {
+static clearAllFilmsFromUI(element) {
     const filmList = document.getElementById("films"); //films id'li tabloyu seçtik
     // filmList.innerHTML = ""; //filmList'in içini boşaltma
     while (filmList.firstElementChild !== null) { //filmList'in ilk çocuğu boş değilse
@@ -73,3 +71,6 @@ UI.prototype.clearAllFilmsFromUI = function (element) {
     }
 
 }
+
+}
+
